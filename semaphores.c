@@ -11,6 +11,15 @@
 
 #define SIZE 16
 
+/********************************************************************
+ * This program demonstrates the use of semaphores by using shared
+ * memory and critical section collision avoidence.
+ *
+ * @authors Cade Baker, Louis Sullivan
+ * @version 1.0 (10/11/2018)
+ *
+ *******************************************************************/
+
 int main (int argc, char **argv)
 {
     int status;
