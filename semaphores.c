@@ -86,8 +86,9 @@ int main (int argc, char **argv)
             temp = shmPtr[0];
             shmPtr[0] = shmPtr[1];
             shmPtr[1] = temp;
-			//TODO Figure out why tab isn't working between values
-            printf ("CHILD values: %li\t%li\n", shmPtr[0], shmPtr[1]);
+
+     		// output the current value of the shared memory in the child
+            printf ("CHILD values:  %li \t %li\n", shmPtr[0], shmPtr[1]);
         }
         printf("\n");
 
@@ -120,7 +121,7 @@ int main (int argc, char **argv)
             temp = shmPtr[1];
             shmPtr[1] = shmPtr[0];
             shmPtr[0] = temp;
-            printf ("PARENT values: %li\t%li\n", shmPtr[0], shmPtr[1]);
+            printf ("PARENT values: %li \t %li\n", shmPtr[0], shmPtr[1]);
         }
         printf("\n");
 
@@ -136,14 +137,16 @@ int main (int argc, char **argv)
 
 	}
 
-		//remove smeaphore
-		semctl(semId, 0, IPC_RMID);
-
+	//remove the smeaphore
+	if (semctl(semId, 0, IPC_RMID) < 0){
+	   perror ("can't deallocate semaphore");
+	   exit(1);
+        }
         
         // detach the shared memory segment from the pointer 
         if (shmdt (shmPtr) < 0) {
-            perror ("just can't let go\n");
-            exit (1);
+        	perror ("just can't let go\n");
+        	exit (1);
         }
 
         //  remove the shared memory
