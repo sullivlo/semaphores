@@ -135,10 +135,10 @@ int main (int argc, char **argv)
         }
 
         // Remove semaphore
-        if (shmctl (semId, IPC_RMID, 0) < 0) {
-            perror ("can't deallocate\n");
-            exit(1);
-        }
+        //if (shmctl (semId, IPC_RMID, 0) < 0) {
+        //    perror ("can't deallocate\n");
+         //   exit(1);
+        //}
  
 
 
